@@ -90,3 +90,25 @@ sourceCompatibility = 15
 sourceSets.main.java.srcDirs = [ "src/" ]
 
 eclipse.project.name = appName + "-html"
+
+
+draftCompileGwt {
+    doFirst {
+        jvmArgs "-javaagent:${configurations.lom.asPath}=ECJ"
+    }
+}
+
+compileGwt {
+    doFirst {
+        jvmArgs "-javaagent:${configurations.lom.asPath}=ECJ"
+    }
+}
+
+superDev {
+    doFirst {
+        jvmArgs "-javaagent:${configurations.lom.asPath}=ECJ"
+    }
+}
+
+tasks.compileGwt.dependsOn(addSource)
+tasks.draftCompileGwt.dependsOn(addSource)

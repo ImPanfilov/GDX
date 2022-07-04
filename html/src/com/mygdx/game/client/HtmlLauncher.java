@@ -18,9 +18,9 @@ public class HtmlLauncher extends GwtApplication {
 
 
     @Override
-        public GwtApplicationConfiguration getConfig () {
-               return new GwtApplicationConfiguration(720, 720);
-        }
+    public GwtApplicationConfiguration getConfig () {
+        return new GwtApplicationConfiguration(720, 720);
+    }
 
     private native WebSocket getWebSocket(String url)
                 /*-{
@@ -39,9 +39,9 @@ public class HtmlLauncher extends GwtApplication {
                 }-*/
     ;
 
-        @Override
-        public ApplicationListener createApplicationListener () {
-            final WebSocket client= getWebSocket("ws:89.253.218.18:8888/ws");
+    @Override
+    public ApplicationListener createApplicationListener () {
+            final WebSocket client= getWebSocket("wss:impanfilov.ddns.net:8443/ws");
             final MyGdxGame myGdxGame=new MyGdxGame(new InputStateImpl());
             final MessageProcessor messageProcessor=new MessageProcessor(myGdxGame);
 
@@ -68,17 +68,18 @@ public class HtmlLauncher extends GwtApplication {
                 }
             };
 
-                client.addEventListener("open", new EventListenerCallback() {
+            client.addEventListener("open", new EventListenerCallback() {
                     @Override
                     public void callEvent(WsEvent event) {
                         messageProcessor.processEvent(event);
                         timer.scheduleRepeating(200);
                     }
                 });
-                client.addEventListener("close",callback);
-                client.addEventListener("error",callback);
-                client.addEventListener("message",callback);
 
-                return myGdxGame;
-        }
+            client.addEventListener("close",callback);
+            client.addEventListener("error",callback);
+            client.addEventListener("message",callback);
+
+            return myGdxGame;
+    }
 }

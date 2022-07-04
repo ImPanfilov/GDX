@@ -30,11 +30,12 @@ public class MyGdxGame extends ApplicationAdapter {
 	private int viewSize=15;
 	public ObjectMap<String,Snake> snakes=new ObjectMap<>();
 	private final Keyboard inputProcessor;
-	private  static Desk desk=new Desk();
+	private Desk deskBody=new Desk();
 	private static Desk renderBody=new Desk();
 	private MessageSender messageSender;
 	private Snake me=new Snake();
 	private Array<String> bestScore=new Array<>(5);
+
 
 	public MyGdxGame(InputState inputState) {
 		this.inputProcessor = new Keyboard(inputState);
@@ -142,33 +143,33 @@ public class MyGdxGame extends ApplicationAdapter {
 	}
 
 	public void evict(String idToEvict) {
-		snakes.get(idToEvict).clear(desk);
+		snakes.get(idToEvict).clear(deskBody);
 		snakes.remove(idToEvict);
 	}
 
 	public void clearSnake(Snake tmpSnake) {
-		tmpSnake.clear(desk);
+		tmpSnake.clear(deskBody);
 	}
 
 	public void updateSnake(String id, int x, int y, int state, boolean changed, int direction) {
-		Pos tmpPos=desk.setPos(x,y, state, changed, direction);
+		Pos tmpPos=deskBody.setPos(x,y, state, changed, direction);
 		snakes.get(id).updateSnake(tmpPos);
 	}
 
 	public void setUpScene(){
-		if ((desk.getSizeDesk()>0)&&(snakes.get(meId).getSize()>0)) {
+		if ((deskBody.getSizeDesk()>0)&&(snakes.get(meId).getSize()>0)) {
 			for (int i = 0; i < viewSize; i++)
 				for (int j = 0; j < viewSize; j++) {
-					int x=Check(snakes.get(meId).getHead().getXpos() - 7+ i);
-					int y=Check(snakes.get(meId).getHead().getYpos() - 7+ j);
-					renderBody.updateDesk(i, j, desk.getState(x,y), true, desk.getDirection(x,y));
+					int x=Check(snakes.get(meId).getHead().getXPos() - 7+ i);
+					int y=Check(snakes.get(meId).getHead().getYPos() - 7+ j);
+					renderBody.updateDesk(i, j, deskBody.getState(x,y), true, deskBody.getDirection(x,y));
 				}
 		}
 	}
 
 	public int Check(int X) {
-		X=(X <0) ? (X+desk.getSizeDesk()) : X;
-		X=(X>(desk.getSizeDesk()-1)) ? (X-desk.getSizeDesk()) : X;
+		X=(X <0) ? (X+deskBody.getSizeDesk()) : X;
+		X=(X>(deskBody.getSizeDesk()-1)) ? (X-deskBody.getSizeDesk()) : X;
 		return X;
 	}
 
@@ -182,15 +183,15 @@ public class MyGdxGame extends ApplicationAdapter {
 	}
 
 	public void setSizeDesk(int size) {
-		desk.setSizeDesk(size);
+		deskBody.setSizeDesk(size);
 	}
 
 	public void initDesk() {
-		desk.initDesk();
+		deskBody.initDesk();
 	}
 
 	public void updateDesk(int x, int y, int state, boolean changed, int direction) {
-		desk.updateDesk(x, y, state,changed,direction);
+		deskBody.updateDesk(x, y, state,changed,direction);
 	}
 
 

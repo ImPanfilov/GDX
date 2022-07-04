@@ -36,6 +36,7 @@ public class MessageProcessor {
         JSONValue type=object.get("class");
         if (type!=null){
             switch (type.isString().stringValue()){
+
                 case "sessionKey":
                     String meId=object.get("id").isString().stringValue();
                     myGdxGame.setMeId(meId);
@@ -44,6 +45,7 @@ public class MessageProcessor {
                     myGdxGame.initDesk();
                     myGdxGame.snakes.put(meId,new Snake());
                     break;
+
                 case "evict":
                     String idToEvict=object.get("id").isString().stringValue();
                     myGdxGame.evict(idToEvict);
@@ -64,7 +66,7 @@ public class MessageProcessor {
                     tmpSnake.setName(name);
                     i =object.get("pos").isArray().size();
                     for (int j = 0; j < i; j++) {
-                         JSONValue qwe=object.get("pos").isArray().get(j);
+                        JSONValue qwe=object.get("pos").isArray().get(j);
                         x=(int)qwe.isObject().get("x").isNumber().doubleValue();
                         y=(int)qwe.isObject().get("y").isNumber().doubleValue();
                         state = (int) qwe.isObject().get("state").isNumber().doubleValue();
@@ -74,6 +76,7 @@ public class MessageProcessor {
                     }
                     myGdxGame.setStateTime(0f);
                     break;
+
                 case "food":
                     i =object.get("pos").isArray().size();
                     for (int j = 0; j < i; j++) {

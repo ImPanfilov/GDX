@@ -1,27 +1,23 @@
 package com.mygdx.game;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class Desk {
-
     private Pos[][] DeskBody;
-    private int SizeDesk=0;
-
-    public  Desk(){}
+    int SizeDesk=0;
 
     public int getState(int XPos, int YPos)
-        {
+    {
         return this.DeskBody[XPos][YPos].getState();
-        }
-
-    public int getDirection(int XPos, int YPos)
-        {
-        return this.DeskBody[XPos][YPos].getDirection();
-        }
-
-    public void setSizeDesk(int sizeDesk) {
-        this.SizeDesk=sizeDesk;
     }
 
-    public int getSizeDesk() { return SizeDesk;}
+    public int getDirection(int XPos, int YPos)
+    {
+        return this.DeskBody[XPos][YPos].getDirection();
+    }
 
     public void initDesk() {
         DeskBody = new Pos[SizeDesk][SizeDesk];

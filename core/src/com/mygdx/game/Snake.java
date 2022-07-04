@@ -1,28 +1,25 @@
 package com.mygdx.game;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayDeque;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Snake{
-    private String Id;
-    private String type;
-    private  String name;
-    private int score;
-    private final ArrayDeque<Pos> Bodysnake;//тело змея
+    String Id;
+    String type="name";
+    String name="user";
+    int Score=0;
+    final ArrayDeque<Pos> Bodysnake= new ArrayDeque<>();//тело змея
 
-    public Snake()
-        {
-        setType("name");
-        setName("user");
-        score=0;
-        Bodysnake = new ArrayDeque<>();
-        }
 
     public Snake(String id,String name)
     {   this.name=name;
         this.Id=id;
-        Bodysnake = new ArrayDeque<>();
-        score=0;
-
     }
 
     public native String getName() /*-{
@@ -58,23 +55,8 @@ public class Snake{
         return Bodysnake.peekLast();
     }
 
-    public String getId() {
-        return Id;
-    }
 
-    public void setId(String id) {
-        Id = id;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public int getSize() {
+     public int getSize() {
         return Bodysnake.size();
     }
 }

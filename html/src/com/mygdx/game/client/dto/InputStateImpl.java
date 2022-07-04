@@ -2,6 +2,7 @@ package com.mygdx.game.client.dto;
 
 import com.mygdx.game.InputState;
 
+
 public class InputStateImpl implements InputState {
 
     public InputStateImpl(){
